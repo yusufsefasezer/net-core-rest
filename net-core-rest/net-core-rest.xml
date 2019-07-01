@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>net-core-rest</name>
+    </assembly>
+    <members>
+        <member name="M:net_core_rest.Controllers.ContactsController.GetContacts">
+            <summary>
+            Retrieves contact list
+            </summary>
+            <returns>A response with contact list</returns>
+            <response code="200">Returns the contact list</response>
+        </member>
+        <member name="M:net_core_rest.Controllers.ContactsController.GetContact(System.Int32)">
+            <summary>
+            Retrieves a contact by id
+            </summary>
+            <param name="id">contact id</param>
+            <returns>A response with contact</returns>
+            <response code="200">Returns the contact</response>
+            <response code="404">If contact is not exists</response>
+        </member>
+        <member name="M:net_core_rest.Controllers.ContactsController.PutContact(System.Int32,net_core_rest.Models.Contact)">
+            <summary>
+            Updates an existing contact
+            </summary>
+            <param name="id">contact id</param>
+            <param name="contact">Contact model</param>
+            <returns>A response as update contact result</returns>
+            <response code="200">If contact was updated successfully</response>
+            <response code="400">For bad request</response>
+            <response code="404">If contact is not exists</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:net_core_rest.Controllers.ContactsController.PostContact(net_core_rest.Models.Contact)">
+            <summary>
+            Creates a new contact
+            </summary>
+            <param name="contact">Contact model</param>
+            <returns>A response with new contact</returns>
+            <response code="201">A response as creation of contact</response>
+        </member>
+        <member name="M:net_core_rest.Controllers.ContactsController.DeleteContact(System.Int32)">
+            <summary>
+            Deletes an existing contact
+            </summary>
+            <param name="id">Contact id</param>
+            <returns>A response as delete contact result</returns>
+            <response code="200">If contact was deleted successfully</response>
+            <response code="404">If contact is not exists</response>
+        </member>
+    </members>
+</doc>
