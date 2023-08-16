@@ -21,9 +21,9 @@ export class GlobalService {
   public searchTerm = '';
 
   public contacts: Contact[] = [];
-  public currentContact: Contact;
+  public currentContact: Contact = Contact.empty();
 
-  public contactForm: FormGroup;
+  public contactForm: FormGroup = new FormGroup({});
 
   constructor() { }
 
@@ -37,10 +37,6 @@ export class GlobalService {
       address: new FormControl(),
       notes: new FormControl()
     });
-  }
-
-  formatPhoneNumber(phone) {
-    return phone ? phone.substr(0, 3) + ' ' + phone.substr(0, 3) + ' ' + phone.substr(0, 3) : phone;
   }
 
   filterChecked() {

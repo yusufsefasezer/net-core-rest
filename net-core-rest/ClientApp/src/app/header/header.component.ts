@@ -6,10 +6,8 @@ import { WrapperService } from '../wrapper.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  constructor(private wrapperService: WrapperService) { }
-
-  ngOnInit() { }
+  constructor(public wrapperService: WrapperService) { }
 
 }

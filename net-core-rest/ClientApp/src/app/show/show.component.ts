@@ -11,8 +11,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ShowComponent implements OnInit {
 
   constructor(
-    private wrapperService: WrapperService,
-    private sanitizer: DomSanitizer,
+    public wrapperService: WrapperService,
+    public sanitizer: DomSanitizer,
     private route: ActivatedRoute
   ) {
     this.subscribe();
@@ -31,7 +31,8 @@ export class ShowComponent implements OnInit {
   }
 
   get id(): number {
-    return parseInt(this.route.snapshot.paramMap.get('id'), 10);
+    let id: string = this.route.snapshot.params['id'];
+    return parseInt(id, 10);
   }
 
 }

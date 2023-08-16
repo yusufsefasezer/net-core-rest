@@ -18,9 +18,10 @@ export class WrapperService {
   }
 
   getContact(id: number): Contact {
-    return this.globalService.contacts.find((contact) => {
+    let foundContact = this.globalService.contacts.find((contact) => {
       return contact.id === id;
     });
+    return foundContact as Contact;
   }
 
   setContact(id: number) {
@@ -43,14 +44,12 @@ export class WrapperService {
   }
 
   async getContacts() {
-    this.globalService.contacts = await this.contactService.getContacts().toPromise();
+    this.contactService.getContacts().subscribe(contacts => this.globalService.contacts = contacts);
   }
 
   addContact() {
     this.contactService.addContact(this.globalService.currentContact).subscribe(result => {
       this.getContacts();
-    }, error => {
-      console.log('addContact', error);
     });
   }
 
@@ -59,8 +58,6 @@ export class WrapperService {
     Object.assign(foundContact, this.globalService.currentContact);
     this.contactService.updateContact(foundContact).subscribe(result => {
       this.getContacts();
-    }, error => {
-      console.log('updateContact', error);
     });
   }
 
@@ -74,8 +71,6 @@ export class WrapperService {
         this.globalService.resetStatus();
         this.router.navigate(['/']);
       }
-    }, error => {
-      console.log('deleteContact', error);
     });
   }
 
@@ -87,8 +82,6 @@ export class WrapperService {
       .forEach((value) => {
         this.contactService.deleteContactById(value.id).subscribe(result => {
           this.getContacts();
-        }, error => {
-          console.log('deleteContacts', error);
         });
       });
     this.globalService.resetStatus();
@@ -97,7 +90,7 @@ export class WrapperService {
 
   showImage(event: Event) {
     const targetElement: HTMLInputElement = event.target as HTMLInputElement;
-    const selectedFiles: FileList = targetElement.files;
+    const selectedFiles: FileList = targetElement.files as FileList;
 
     if (selectedFiles.length !== 1) {
       return false;
@@ -110,11 +103,11 @@ export class WrapperService {
 
     const fileReader: FileReader = new FileReader();
 
-    fileReader.addEventListener('load', (readerEvent: FileReaderEvent) => {
+    fileReader.addEventListener('load', (readerEvent: any) => {
 
       const newImage = new Image();
       const canvas: HTMLCanvasElement = document.createElement('canvas');
-      const ctx: CanvasRenderingContext2D = canvas.getContext('2d');
+      const ctx: CanvasRenderingContext2D = canvas.getContext('2d') as CanvasRenderingContext2D;
       const MAX = this.globalService.MAX;
 
       newImage.addEventListener('load', () => {

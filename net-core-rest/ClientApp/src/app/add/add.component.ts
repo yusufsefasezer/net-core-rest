@@ -11,17 +11,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class AddComponent implements OnInit {
 
   constructor(
-    private wrapperService: WrapperService,
-    private sanitizer: DomSanitizer) {
+    public wrapperService: WrapperService,
+    public sanitizer: DomSanitizer) {
     this.wrapperService.globalService.createContactForm();
   }
 
   ngOnInit() {
     this.wrapperService.globalService.showAdd();
-    // this.wrapperService.globalService.currentContact = new Contact(null, null, null, null, '/assets/no-image.svg', null, null);
-    this.wrapperService.globalService.currentContact = new Contact();
-    this.wrapperService.globalService.currentContact.photo = '/assets/no-image.svg';
-
+    this.wrapperService.globalService.currentContact = Contact.empty();
   }
 
   get f() {
